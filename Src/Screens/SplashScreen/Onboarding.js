@@ -1,0 +1,167 @@
+
+import React,{useState,useRef} from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView, FlatList, Image, Dimensions, StatusBar } from 'react-native';
+const COLORS = { primary: 'white', black: '#0A0A0A' };
+import {useNavigation} from '@react-navigation/native';
+
+
+const { width, height } = Dimensions.get('window');
+const slides = [
+  {
+    id: 1,
+    image: require('../../Images/Food.png'),
+    title: 'Discover all recipes you needed',
+    subtitle: 'Explore 100 plus recipes',
+
+  },
+  {
+    id: 2,
+    image: require('../../Images/image1.png'),
+    title: 'Waiter is hero here',
+    subtitle: 'waiter helps you to do login into app to place your.',
+  },
+  {
+    id: 3,
+    image: require('../../Images/trackorder.png'),
+    title: 'Track your orders',
+    subtitle: "Know what is status of your order",
+  }
+]
+const Slide = ({ item }) => {
+  return (
+    <View style={{ alignItems: 'center' }}>
+
+      <Image source={item.image} style={{
+        height: '75%', width
+
+        , resizeMode: 'contain'
+      }}>
+
+      </Image>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.subtitle}>{item.subtitle}</Text>
+
+    </View>
+  )
+}
+const OnBoarding = ({navigation}) => {
+  
+  const [currentSlideIndex, setCurrentSlideIndex] = React.useState(0);
+  const ref=React.useRef(null);
+
+  const Footer = () => {
+    return (
+      <View style={{
+        height: height * 0.25,
+        justifyContent: 'space-between',
+        paddingHorizontal: 20}}>
+
+        <View style={{ flexDirection: 'row',marginTop: 20,justifyContent:'center' }}>
+
+
+          {slides.map((_, index) =>
+          (
+            <View key={index} style={[styles.indicator, currentSlideIndex == index && { backgroundColor: COLORS.black, width: 25},]} />
+          ))}
+
+        </View>
+            <View style={{marginBottom:30}}>
+            {
+              
+              currentSlideIndex == slides.length-1  ? ( <View style={{height:50}}>
+              <TouchableOpacity style={{backgroundColor:'black',justifyContent:'center',borderRadius:10,height:50}} onPress={()=> navigation.navigate('Login')}>
+              <Text style={{color:'white',alignSelf:'center',fontSize:18}}>Get Started</Text>
+             </TouchableOpacity>
+               </View>
+              ):
+            
+        
+      
+         (
+         <TouchableOpacity onPress={goNextSlide}style={{backgroundColor:'black',justifyContent:'center',borderRadius:10,height:50}}>
+           <Text style={{color:'white',alignSelf:'center',fontSize:18}}>Next</Text>
+          </TouchableOpacity>)
+          
+          }
+       </View>
+          </View> 
+    );
+  }
+  const updatecurrentSlideIndex = e  =>
+  {
+    const contentOffsetX = e.nativeEvent.contentOffset.x;
+    const currentIndex = Math.round(contentOffsetX / width);
+    setCurrentSlideIndex(currentIndex);
+    console.log(contentOffsetX);
+  };
+
+  const goNextSlide = () =>
+  {
+    const nextSlideIndex = currentSlideIndex +1 ;
+    if(nextSlideIndex != slides.length)
+    {
+      const offset = nextSlideIndex * width;
+      ref?.current?.scrollToOffset({offset});
+      setCurrentSlideIndex(nextSlideIndex);
+    }
+   
+  };
+
+
+
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
+      <FlatList
+      ref={ref}
+      onMomentumScrollEnd={updatecurrentSlideIndex}
+        pagingEnabled
+        data={slides}
+        contentContainerStyle={{
+          height: height * 0.75
+
+        }}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        renderItem={({ item }) => <Slide item={item} />}
+      />
+
+<Footer/>
+    </SafeAreaView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  title:
+  {
+    color: COLORS.white,
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginTop: 20,
+    textAlign: 'center'
+  },
+  subtitle:
+  {
+    color: COLORS.black,
+    fontSize: 13,
+    maxWidth: '75%',
+    marginTop: 10,
+    textAlign: 'center',
+    lineHeight: 23
+  },
+  indicator:
+  {
+    height: 20,
+    width: 20,
+    backgroundColor: 'grey',
+    marginHorizontal: 3,
+    borderRadius:20
+  }
+
+
+
+
+});
+
+export default OnBoarding;
