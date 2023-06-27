@@ -1,70 +1,56 @@
-
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, TextInput, SafeAreaView ,Image} from 'react-native';
-import styles from './Style/LoginStyle'
+import React, {useEffect, useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  SafeAreaView,
+  Image,
+  Alert,
+} from 'react-native';
+import styles from './Style/LoginStyle';
 import {useNavigation} from '@react-navigation/native';
-
-
+import CustomButton from '../../common/CustomButton';
+import auth from '@react-native-firebase/auth';
+import {ScrollView} from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const LoginScreen = () => {
-
-  const navigation = useNavigation();
-  const [Phone, setPhone] = useState('');
-  const [PhoneValidError, setPhoneValidError] = useState('');
-
-  const handleValidPhone = () => {
-    const Phonereg = /^[0-9]{10}$/;
-    if (Phone.length === 0) {
-      setPhoneValidError('Phone must be enter');
-    } else if (Phonereg.test(Phone) === false) {
-      setPhoneValidError('enter valid Phone*');
-    } else if (Phonereg.test(Phone) === true) {
-      setPhoneValidError('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const Navigation = useNavigation();
+  const saveEmailPass = async () => {
+    try {
+      await AsyncStorage.setItem('EMAIL', email);
+      await AsyncStorage.setItem('PASSWORD', password);
+      Navigation.navigate('MainContainer');
+    } catch (e) {
+      console.log(e);
     }
   };
-    return (
-       
-            <View style={styles.main} >
 
-           
-            <Image style={styles.image}
-            source={require('../../Images/Login.png')}
-          />
-           <Text style={styles.logintext}>Login</Text>
-           <Text style={styles.logindescription}>Enter your mobile number to verify your account</Text>
+  return (
+    <ScrollView style={styles.main}>
+      <Image style={styles.image} source={require('../../Images/Login.png')} />
+      <Text style={styles.logintext}>Login</Text>
+      <Text style={styles.logindescription}>
+        Enter Email and password to verify your account
+      </Text>
+      <Text style={styles.phonenotext}>Enter Email id</Text>
+      <TextInput
+        placeholderTextColor={'grey'}
+        style={styles.phonenotextinput}
+        onChangeText={txt => setEmail(txt)}
+        value={email}></TextInput>
+      <Text style={styles.phonenotext}>Password</Text>
+      <TextInput
+        placeholderTextColor={'grey'}
+        style={styles.phonenotextinput}
+        onChangeText={txt => setPassword(txt)}
+        value={password}></TextInput>
 
-
-            <Text style={styles.phonenotext}>Enter Mobile Number</Text>
-
-           
-          
-             
-            <TextInput keyboardType='numeric' style={styles.phonenotextinput} placeholder=' 9875421684' maxLength={10}  value={Phone}
-         
-          onChangeText={value => {
-            setPhone(value);
-          }}></TextInput>
-
-            {PhoneValidError ? (
-          <Text style={{color: 'red', fontSize: 16, alignSelf: 'flex-end' ,marginRight:40}}>
-            {PhoneValidError}
-          </Text>
-        ) : null}
-{/* <TouchableOpacity style={styles.continuebutton} onPress={value =>
-handleValidPhone(value)}> */}
-<TouchableOpacity style={styles.continuebutton} onPress={()=> navigation.navigate('Otp')} >
-            <Text style={styles.continuebuttontext}>Authenticate</Text>
-</TouchableOpacity>
-
-
-
-
-           
-            </View>
-
-
-    );
-}
-
-
-
+      <CustomButton title={'Authenticate'} onClick={() => saveEmailPass()} />
+    </ScrollView>
+  );
+};
 export default LoginScreen;

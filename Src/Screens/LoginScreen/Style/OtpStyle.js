@@ -13,7 +13,7 @@ export default StyleSheet.create({
     {
         fontSize: 28,
         color: 'black',
-        fontWeight: 'bold',
+        fontFamily:'VarelaRound-Regular',
         marginTop: 100,
         textAlign: 'center',
     },
@@ -25,7 +25,8 @@ export default StyleSheet.create({
         maxWidth: 500,
 
         paddingHorizontal: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily:'VarelaRound-Regular',
 
     },
     otpbox:
@@ -38,7 +39,7 @@ export default StyleSheet.create({
     otpno:
     {
         flexDirection: 'row',
-
+        fontFamily:'VarelaRound-Regular',
         borderRadius: 10,
         height: 55,
         width: '12%',
@@ -58,7 +59,7 @@ export default StyleSheet.create({
     phonenotext:
     {
 
-        marginTop: 30, fontSize: 16, marginLeft: 40, color: 'black', fontWeight: 'bold', marginHorizontal: 20
+        marginTop: 30, fontSize: 16, marginLeft: 40, color: 'black', marginHorizontal: 20,fontFamily:'VarelaRound-Regular'
     },
     phonenotextinput:
     {
@@ -73,19 +74,19 @@ export default StyleSheet.create({
 
     continuebutton: {
         borderRadius: 18,
-        borderWidth: 0.8,
-        borderColor: 'grey',
+      
         alignSelf: 'center',
-        backgroundColor: 'black',
+        backgroundColor: '#ff8b3d',
         justifyContent: 'center',
         height: 60, width: 340,
-        marginTop: 30
+        marginTop: 30,
+        
 
     },
     continuebuttontext:
     {
 
-        color: 'white', fontSize: 18, justifyContent: 'center', alignSelf: 'center'
+        color: 'white', fontSize: 18, justifyContent: 'center', alignSelf: 'center',fontFamily:'VarelaRound-Regular',
     },
 
 });

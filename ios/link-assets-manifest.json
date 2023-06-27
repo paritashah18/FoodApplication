@@ -1,0 +1,41 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "Src/assets/fonts/Jaldi-Bold.ttf",
+      "sha1": "d8dc4b326797de3acaf79efa113cf75eb65e47ae"
+    },
+    {
+      "path": "Src/assets/fonts/Jaldi-Regular.ttf",
+      "sha1": "22ed42b717eb09d29308476d1518ded49e5d1769"
+    },
+    {
+      "path": "Src/assets/fonts/Poppins-Black.ttf",
+      "sha1": "645e04c53c6b5b35bce654a811ebce16af8aa721"
+    },
+    {
+      "path": "Src/assets/fonts/Poppins-BlackItalic.ttf",
+      "sha1": "be4ef2aac7775a4b0179c0ecfce6cea8f7783f63"
+    },
+    {
+      "path": "Src/assets/fonts/Poppins-Bold.ttf",
+      "sha1": "875cf0cecd647bcf22e79d633d868c1b1ec98dfa"
+    },
+    {
+      "path": "Src/assets/fonts/Poppins-BoldItalic.ttf",
+      "sha1": "6de8952ca08d27ee77f57347d2cef4b4e26aa78f"
+    },
+    {
+      "path": "Src/assets/fonts/Poppins-ExtraBoldItalic.ttf",
+      "sha1": "94d3ee3acdbd00e37a715a25f2b5237666b5b8a3"
+    },
+    {
+      "path": "Src/assets/fonts/Poppins-ExtraLight.ttf",
+      "sha1": "85af6582a7e6155917c605f9d3fed68c02b23b06"
+    },
+    {
+      "path": "Src/assets/fonts/VarelaRound-Regular.ttf",
+      "sha1": "549e4b02217aff2920c11101eca6b41c805ccb69"
+    }
+  ]
+}
