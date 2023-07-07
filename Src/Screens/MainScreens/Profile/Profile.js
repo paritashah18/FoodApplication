@@ -46,10 +46,7 @@ const ProfileScreen = () => {
           <MaterialCommunityIcons
             name="account-edit-outline"
             size={30}
-            color={'black'}
-            onPress={() =>
-              navigation.navigate('Editprofileusrname ')
-            }></MaterialCommunityIcons>
+            color={'black'}></MaterialCommunityIcons>
         </TouchableOpacity>
       </View>
 
@@ -70,7 +67,7 @@ const ProfileScreen = () => {
             size={30}
             color={'black'}
             onPress={() => {
-              logout()
+              logout();
             }}></MaterialCommunityIcons>
         </TouchableOpacity>
       </View>

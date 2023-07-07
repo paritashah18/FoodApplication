@@ -1,4 +1,3 @@
-import {getTabBarHeight} from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
 import {createSlice} from '@reduxjs/toolkit';
 
 const CartSlice = createSlice({
@@ -6,7 +5,6 @@ const CartSlice = createSlice({
   initialState: [],
   reducers: {
     addFooditemToMyCart(state, action) {
-      //it for getting index and check it is present or not.
       let myindex = -1;
       state.map((item, index) => {
         if (item.id == action.payload.id) {
