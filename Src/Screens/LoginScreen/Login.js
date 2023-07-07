@@ -9,12 +9,13 @@ import {
   Image,
   Alert,
 } from 'react-native';
-import styles from './Style/LoginStyle';
+import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CustomButton from '../../common/CustomButton';
 import auth from '@react-native-firebase/auth';
 import {ScrollView} from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

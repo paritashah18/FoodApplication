@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import {ScrollView} from 'react-native-gesture-handler';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   addFooditemToMyCart,
@@ -15,9 +14,15 @@ import {
   deleteMyCartItem,
 } from '../../../redux/slices/CartSlice';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import styles from './styles';
 import Header from '../../../common/Header';
+import {useNavigation} from '@react-navigation/native';
 import {decreseqty, increseqty} from '../../../redux/slices/FoodSlice';
-const CartItems = ({navigation}) => {
+import HomeScreen from '../Home/FoodItem';
+
+const CartItems = () => {
+  const Navigation = useNavigation();
+
   const CartItem = useSelector(state => state.cart);
   console.log('Added cart items', CartItem);
 
@@ -36,36 +41,16 @@ const CartItems = ({navigation}) => {
       <Header title={'Cart'} />
 
       <FlatList
-        style={{marginTop: 10, marginBottom: 10}}
+        style={styles.flatliststyle}
         showsVerticalScrollIndicator={false}
         data={CartItem}
         renderItem={({item, index}) => {
           return (
-            <View style={styles.container}>
-              <View
-                style={{
-                  height: 120,
-                  backgroundColor: '#ffff',
-                  borderRadius: 20,
-                  marginTop: 18,
-                  flexDirection: 'row',
-
-                  width: '94%',
-                  paddingLeft: 10,
-                  bottom: 18,
-
-                  alignSelf: 'center',
-                  elevation: 10,
-                  padding: 10,
-                }}>
+            <View style={styles.maincontainer}>
+              <View style={styles.container}>
                 <Image source={item.img} style={styles.adminlogo} />
 
-                <View
-                  style={{
-                    flexDirection: 'column',
-                    marginLeft: 10,
-                    marginTop: 5,
-                  }}>
+                <View style={styles.foodmenuitems}>
                   <Text style={styles.name}>{item.dish}</Text>
                   <Text style={styles.price}>{item.price}</Text>
 
@@ -78,7 +63,7 @@ const CartItems = ({navigation}) => {
                             dispatch(decreseqty(item.id));
                             dispatch(removeFooditemToMyCart(item));
                           } else {
-                            dispatch(deleteMyCartItem({ id: item.id }));
+                            dispatch(deleteMyCartItem({id: item.id}));
                             dispatch(decreseqty(item.id));
                           }
                         }}>
@@ -124,85 +109,5 @@ const CartItems = ({navigation}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  Maintext: {
-    fontSize: 26,
-    color: 'black',
-    fontFamily: 'VarelaRound-Regular',
-    marginLeft: 25,
-    top: 5,
-  },
-  Maintext2: {
-    fontSize: 26,
-    color: 'black',
-    fontFamily: 'VarelaRound-Regular',
-    marginLeft: 25,
-    top: 5,
-    marginBottom: 10,
-  },
-  adminlogo: {
-    height: 60,
-    width: 60,
-    borderRadius: 40,
-    alignSelf: 'center',
-  },
-  name: {
-    fontSize: 15,
-    letterSpacing: 1,
-    color: 'black',
-    fontFamily: 'VarelaRound-Regular',
-  },
-
-  price: {
-    fontSize: 15,
-    letterSpacing: 1,
-    color: 'grey',
-    fontFamily: 'VarelaRound-Regular',
-  },
-  totalamounttextview: {
-    height: 40,
-    backgroundColor: '#ffff',
-    borderRadius: 20,
-    marginTop: 15,
-    marginHorizontal: 20,
-    justifyContent: 'flex-start',
-    flexDirection: 'row',
-    marginBottom: 20,
-  },
-  totalamounttext: {
-    marginLeft: 20,
-    marginRight: 180,
-    fontFamily: 'VarelaRound-Regular',
-    color: 'black',
-    fontSize: 15,
-    marginTop: 10,
-  },
-  button: {
-    borderRadius: 18,
-    backgroundColor: '#ff8b3d',
-    height: 60,
-    width: 340,
-    marginTop: 20,
-    alignSelf: 'center',
-    justifyContent: 'center',
-  },
-  buttontext: {
-    color: 'white',
-    fontSize: 18,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    fontFamily: 'VarelaRound-Regular',
-  },
-  finalprice: {
-    fontFamily: 'VarelaRound-Regular',
-    color: 'black',
-    fontSize: 15,
-    marginTop: 10,
-  },
-});
 
 export default CartItems;
